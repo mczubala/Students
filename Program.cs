@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Students;
+using Students.DbContext;
+using Students.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<StudentsDataStore>();
+builder.Services.AddDbContext<StudentsInfoContext>(
+    dbContextOptions => dbContextOptions.UseSqlite(
+        builder.Configuration["ConnectionStrings:StudentsInfoDBConnectionString"]));
+builder.Services.AddScoped<IStudentInfoRepository, StudentInfoRepository>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

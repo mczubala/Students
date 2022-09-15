@@ -28,16 +28,10 @@ public class StudentInfoRepository: IStudentInfoRepository
         return student.LastName;
     }
 
-    public Task CreateStudentAsync(StudentsCreateDto newStudent)
+    public Task CreateStudentAsync(Student newStudent)
     {
-        var student = new Student(newStudent.FirstName,newStudent.LastName);
-
-        student.FirstName = newStudent.FirstName;
-        student.LastName = newStudent.LastName;
-        student.Age = newStudent.Age;
-        student.Gender = newStudent.Gender;
-            _context.Students.Add(student);
-            return Task.CompletedTask;
+        _context.Students.Add(newStudent);
+        return Task.CompletedTask;
     }
     
     public async Task<bool> SaveChangesAsync()

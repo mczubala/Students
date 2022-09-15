@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Students.Entities;
 using Students.Models;
 using Students.Services;
 
@@ -14,16 +16,19 @@ namespace Students.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly IStudentInfoRepository _studentInfoRepository;
-        public StudentsController(IStudentInfoRepository studentInfoRepository)
+        private readonly IMapper _mapper;
+
+        public StudentsController(IStudentInfoRepository studentInfoRepository, IMapper mapper)
         {
             _studentInfoRepository = studentInfoRepository?? throw new ArgumentNullException(nameof(studentInfoRepository));
+            _mapper = mapper;
         }
         // GET: api/Students
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StudentsDto>>> GetStudentsAsync()
         {
             var studentsEtities = await _studentInfoRepository.GetStudentsAsync();
-            return Ok(studentsEtities);
+            return Ok(_mapper.Map<IEnumerable<StudentsDto>>(studentsEtities));
         }
 
         // GET: api/Students/1
@@ -47,7 +52,8 @@ namespace Students.Controllers
         [HttpPost]
         public async Task<ActionResult<StudentsDto>> CreateStudent([FromBody] StudentsCreateDto newStudent)
         {
-            await _studentInfoRepository.CreateStudentAsync(newStudent);
+            await _studentInfoRepository.CreateStudentAsync(_mapper.Map<Entities.Student>(newStudent));
+            await _studentInfoRepository.SaveChangesAsync();
             return Ok();
         }
         //

@@ -56,30 +56,29 @@ namespace Students.Controllers
             await _studentInfoRepository.SaveChangesAsync();
             return Ok();
         }
-        //
-        // // PUT: api/Students/1
-        // [HttpPut("{id}")]
-        // public ActionResult Put(int id, [FromBody] StudentsUpdateDto updateStudent)
-        // {
-        //     var student = _studentsDataStore.Students.FirstOrDefault(x => x.Id == id);
-        //     if (student == null) return NotFound();
-        //     if (updateStudent.FirstName != null) student.FirstName = updateStudent.FirstName;
-        //     if (updateStudent.LastName != null) student.LastName = updateStudent.LastName;
-        //     if (updateStudent.Age != null) student.Age = updateStudent.Age.GetValueOrDefault();
-        //     if (updateStudent.Gender != null) student.Gender = updateStudent.Gender;
-        //
-        //     return NoContent();
-        //
-        // }
-        //
-        // // DELETE: api/Students/1
-        // [HttpDelete("{id}")]
-        // public ActionResult Delete(int id)
-        // {
-        //     var student = _studentsDataStore.Students.FirstOrDefault(x => x.Id == id);
-        //     if (student == null) return NotFound();
-        //     _studentsDataStore.Students.Remove(student);
-        //     return NoContent();
-        // }
+        
+        // PUT: api/Students/1
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateStudent(int id, [FromBody] StudentsUpdateDto updateStudent)
+        {
+            var studentEntity = await _studentInfoRepository.GetStudentAsync(id);
+            _mapper.Map(updateStudent, studentEntity);
+            await _studentInfoRepository.SaveChangesAsync();
+
+            return NoContent();
+        
+        }
+        
+        // DELETE: api/Students/1
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteStudent(int id)
+        {
+            if (!await _studentInfoRepository.StudentExistsAsync(id)) return NotFound();
+            Student student = await _studentInfoRepository.GetStudentAsync(id);
+            _studentInfoRepository.DeleteStudent(student);
+            await _studentInfoRepository.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }

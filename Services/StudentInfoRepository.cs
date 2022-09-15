@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Students.DbContext;
 using Students.Entities;
@@ -22,6 +23,11 @@ public class StudentInfoRepository: IStudentInfoRepository
     {
         return await _context.Students.Where(x => x.Id == id).FirstOrDefaultAsync();
     }
+    
+    public async Task<bool> StudentExistsAsync(int cityId)
+    {
+        return await _context.Students.AnyAsync(c => c.Id == cityId);
+    }
     public async Task<string> GetStudentLastNameAsync(int id)
     {
         var student = await _context.Students.Where(x => x.Id == id).FirstOrDefaultAsync();
@@ -33,7 +39,12 @@ public class StudentInfoRepository: IStudentInfoRepository
         _context.Students.Add(newStudent);
         return Task.CompletedTask;
     }
-    
+
+    public void DeleteStudent(Student student)
+    {
+        _context.Students.Remove(student);
+    }
+
     public async Task<bool> SaveChangesAsync()
     {
         return (await _context.SaveChangesAsync() >= 0);

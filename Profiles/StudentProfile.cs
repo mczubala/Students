@@ -7,5 +7,7 @@ public class StudentProfile: Profile
     {
         CreateMap<Entities.Student, Models.StudentsDto>();
         CreateMap<Models.StudentsCreateDto, Entities.Student>();
+        CreateMap<Models.StudentsUpdateDto, Entities.Student>();
+
     }
 }

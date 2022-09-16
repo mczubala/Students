@@ -33,18 +33,18 @@ public class StudentInfoRepository: IStudentInfoRepository
         var student = await _context.Students.Where(x => x.Id == id).FirstOrDefaultAsync();
         return student.LastName;
     }
-
+// dodac await async 
     public Task CreateStudentAsync(Student newStudent)
     {
         _context.Students.Add(newStudent);
         return Task.CompletedTask;
     }
-
+// warstwa bazodanowa
     public void DeleteStudent(Student student)
     {
         _context.Students.Remove(student);
     }
-
+//zmienic nazwę na is success etc 
     public async Task<bool> SaveChangesAsync()
     {
         return (await _context.SaveChangesAsync() >= 0);

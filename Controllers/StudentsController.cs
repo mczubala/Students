@@ -75,7 +75,7 @@ namespace Students.Controllers
         {
             if (!await _studentInfoRepository.StudentExistsAsync(id)) return NotFound();
             Student student = await _studentInfoRepository.GetStudentAsync(id);
-            _studentInfoRepository.DeleteStudent(student);
+            await _studentInfoRepository.DeleteStudent(student);
             await _studentInfoRepository.SaveChangesAsync();
 
             return NoContent();

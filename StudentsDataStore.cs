@@ -1,31 +1,32 @@
 using Students.Models;
 
-namespace Students;
-
-public class StudentsDataStore
+namespace Students
 {
-    public List<StudentsDto> Students { get; set; }
-
-    public StudentsDataStore()
+    public class StudentsDataStore
     {
-        Students = new List<StudentsDto>()
+        public List<StudentsDto> Students { get; set; }
+
+        public StudentsDataStore()
         {
-            new StudentsDto()
+            Students = new List<StudentsDto>()
             {
-                Id = 1,
-                FirstName = "Adam",
-                LastName = "Adamowicz",
-                Age = 22,
-                Gender = "male"
-            },
-            new StudentsDto()
-            {
-                Id = 2,
-                FirstName = "Basia",
-                LastName = "Basiowicz",
-                Age = 33,
-                Gender = "female"
-            }
-        };
+                new StudentsDto()
+                {
+                    Id = 1,
+                    FirstName = "Adam",
+                    LastName = "Adamowicz",
+                    Age = 22,
+                    Gender = "male"
+                },
+                new StudentsDto()
+                {
+                    Id = 2,
+                    FirstName = "Basia",
+                    LastName = "Basiowicz",
+                    Age = 33,
+                    Gender = "female"
+                }
+            };
+        }
     }
 }

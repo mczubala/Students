@@ -1,13 +1,14 @@
 using AutoMapper;
-namespace Students.Profiles;
-
-public class StudentProfile: Profile
+namespace Students.Profiles
 {
-    public StudentProfile()
+    public class StudentProfile: Profile
     {
-        CreateMap<Entities.Student, Models.StudentsDto>();
-        CreateMap<Models.StudentsCreateDto, Entities.Student>();
-        CreateMap<Models.StudentsUpdateDto, Entities.Student>();
+        public StudentProfile()
+        {
+            CreateMap<Entities.Student, Models.StudentsDto>();
+            CreateMap<Models.StudentsCreateDto, Entities.Student>();
+            CreateMap<Models.StudentsUpdateDto, Entities.Student>();
 
+        }
     }
 }

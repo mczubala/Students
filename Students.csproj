@@ -27,4 +27,12 @@
       <Compile Remove="WeatherForecast.cs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json" />
+      <_ContentIncludedByDefault Remove="DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="DataAccessLayer\obj\DataAccessLayer.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="DataAccessLayer\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="DataAccessLayer\obj\project.packagespec.json" />
+    </ItemGroup>
+
 </Project>

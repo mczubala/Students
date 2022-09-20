@@ -35,54 +35,45 @@ namespace Students.Controllers
             return Ok(abc);
         }
 
-        // // GET: api/Students/1
-        // [HttpGet("{id}")]
-        // public async Task<IActionResult> GetStudent(int id)
-        // {
-        //     var student = await _studentsBLL.GetStudentAsync(id);
-        //     if (student == null) return NotFound();
-        //     return Ok(student);
-        // }
+        // GET: api/Students/1
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetStudent(int id)
+        {
+            var student = await _studentsBLL.GetStudentAsync(id);
+            if (student == null) return NotFound();
+            return Ok(student);
+        }
         
-        // GET: api/Students/1/lastname
-        // [HttpGet("{id}/lastname")]
-        // public async Task<ActionResult<string>> GetStudentLastNameAsync(int id)
-        // {
-        //     var student = await _studentInfoRepository.GetStudentLastNameAsync(id);
-        //     if (student == null) return NotFound();
-        //     return Ok(student);
-        // }
-        // // POST: api/Students
-        // [HttpPost]
-        // public async Task<ActionResult<StudentsDto>> CreateStudent([FromBody] StudentsCreateDto newStudent)
-        // {
-        //     await _studentInfoRepository.CreateStudentAsync(_mapper.Map<Entities.Student>(newStudent));
-        //     await _studentInfoRepository.SaveChangesAsync();
-        //     return Ok();
-        // }
-        //
-        // // PUT: api/Students/1
-        // [HttpPut("{id}")]
-        // public async Task<ActionResult> UpdateStudent(int id, [FromBody] StudentsUpdateDto updateStudent)
-        // {
-        //     var studentEntity = await _studentInfoRepository.GetStudentAsync(id);
-        //     _mapper.Map(updateStudent, studentEntity);
-        //     await _studentInfoRepository.SaveChangesAsync();
-        //
-        //     return NoContent();
-        //
-        // }
-        //
-        // // DELETE: api/Students/1
-        // [HttpDelete("{id}")]
-        // public async Task<ActionResult> DeleteStudent(int id)
-        // {
-        //     if (!await _studentInfoRepository.StudentExistsAsync(id)) return NotFound();
-        //     Student student = await _studentInfoRepository.GetStudentAsync(id);
-        //     await _studentInfoRepository.DeleteStudent(student);
-        //     await _studentInfoRepository.SaveChangesAsync();
-        //
-        //     return NoContent();
-        // }
+        //GET: api/Students/1/lastname
+        [HttpGet("{id}/lastname")]
+        public async Task<ActionResult<string>> GetStudentLastNameAsync(int id)
+        {
+            var student = await _studentInfoRepository.GetStudentLastNameAsync(id);
+            if (student == null) return NotFound();
+            return Ok(student);
+        }
+        // POST: api/Students
+        [HttpPost]
+        public async Task<ActionResult<StudentsDto>> CreateStudent([FromBody] Student newStudent)
+        {
+            await _studentsBLL.CreateStudentAsync(newStudent);
+            return Ok();
+        }
+        
+        // PUT: api/Students/1
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateStudent(int id, [FromBody] Student updateStudent)
+        {
+            await _studentsBLL.UpdateStudentAsync(id, updateStudent);
+            return NoContent();
+        }
+        
+        // DELETE: api/Students/1
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteStudentAsync(int id)
+        {
+            await _studentsBLL.DeleteStudentAsync(id);
+            return NoContent();
+        }
     }
 }

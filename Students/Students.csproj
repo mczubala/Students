@@ -9,6 +9,10 @@
     <ItemGroup>
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.9" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9">
           <PrivateAssets>all</PrivateAssets>
@@ -25,11 +29,23 @@
     <ItemGroup>
       <Compile Remove="Controllers\WeatherForecastController.cs" />
       <Compile Remove="WeatherForecast.cs" />
+      <Compile Remove="Students.DAL\**" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Students.BLL\Students.BLL.csproj" />
-      <ProjectReference Include="..\Students.DAL\Students.DAL.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Students.DAL\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Students.DAL\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Students.DAL\**" />
     </ItemGroup>
 
 </Project>

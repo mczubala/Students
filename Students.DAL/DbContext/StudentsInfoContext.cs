@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Students.Entities;
 
 namespace Students.DbContext
@@ -13,10 +14,7 @@ namespace Students.DbContext
         }
         // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         // {
-        //     if (!optionsBuilder.IsConfigured)
-        //     {
-        //         optionsBuilder.UseSqlite("Data Source=StudentsInfo.db");
-        //     }
+        //     optionsBuilder.UseSqlite("Data Source=StudentsInfo.db"); 
         // }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

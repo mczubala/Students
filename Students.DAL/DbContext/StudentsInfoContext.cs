@@ -6,10 +6,18 @@ namespace Students.DbContext
     public class StudentsInfoContext: Microsoft.EntityFrameworkCore.DbContext
     {
         public DbSet<Student> Students { get; set; } = null!;
+        
         public StudentsInfoContext(DbContextOptions<StudentsInfoContext> options): base (options)
         {
         
         }
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+        //     if (!optionsBuilder.IsConfigured)
+        //     {
+        //         optionsBuilder.UseSqlite("Data Source=StudentsInfo.db");
+        //     }
+        // }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

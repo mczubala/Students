@@ -8,7 +8,6 @@ namespace Students.Profiles
             CreateMap<Entities.Student, Models.StudentsDto>();
             CreateMap<Models.StudentsCreateDto, Entities.Student>();
             CreateMap<Models.StudentsUpdateDto, Entities.Student>();
-
         }
     }
 }

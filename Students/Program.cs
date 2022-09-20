@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Students;
 using Students.DbContext;
-using Students.Services;
+using Students.DAL.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
